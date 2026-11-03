@@ -1,0 +1,138 @@
+/* ==========================================================================
+   CICADA design system · 1/5 · tokens
+   One source for type, colour, spacing and the BIO ⟷ OS "worlds".
+   Every colour is sampled from the CICADA painting and the fresco paper.
+   Text colours are checked for WCAG AA (≥ 4.5:1) on the paper and panels.
+   ========================================================================== */
+
+/* ---------- Self-hosted fonts (SIL OFL — see /static/theme/fonts/LICENSES.txt) ---------- */
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-300-italic.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("/static/theme/fonts/jost-latin-wght-normal.woff2") format("woff2-variations"), url("/static/theme/fonts/jost-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  /* ---- paper & ink (the fresco) ---- */
+  --paper: #efdccb;            /* page ground */
+  --paper-2: #f7efe6;          /* raised panels */
+  --paper-3: #e8d5c1;          /* recessed: table heads, wells */
+  --paper-4: #fbf7f2;          /* inputs */
+  --ink: #1b1512;              /* the logo's ink: headings */
+  --ink-2: #3d3029;            /* body text        10.9:1 on paper */
+  --ink-3: #5e4b3f;            /* secondary text    6.2:1 */
+  --ink-4: #6e5a4c;            /* captions, hints   4.9:1 (minimum for small text) */
+  --rule: rgba(74, 48, 28, .18);
+  --rule-2: rgba(74, 48, 28, .32);
+  --rule-3: rgba(74, 48, 28, .55);
+  --field-edge: #86705e;       /* form-control outlines: ≥ 3.2:1 on the paper, panels and wells (WCAG 1.4.11) */
+
+  /* ---- the painting ---- */
+  --sepia: #7a4a22;   --sepia-text: #7a4a22;   /* 5.5:1 */
+  --gold: #9c6a28;    --gold-text: #735016;    --gold-2: #cf9844;   /* the point of light */
+  --coral: #c9624a;   --coral-text: #9e3f2b;
+  --sage: #66785f;    --sage-text: #45573f;
+  --blue: #3d69bd;    --blue-text: #2c519b;
+  --indigo: #2b3f7c;
+  --graphite: #343a48;
+  --cyanotype: #2a4a8c;       /* the machine's underdrawing */
+  --sanguine: #9e452a;        /* the human's underdrawing */
+
+  /* ---- state (pending · approved · rejected · info · neutral) ---- */
+  --pending-ink: #6b4a10;  --pending-bg: #f5e2b8;  --pending-edge: #d2ad63;
+  --ok-ink: #2f5a2b;       --ok-bg: #dfe8d3;       --ok-edge: #9fb58f;
+  --bad-ink: #8e2a1b;      --bad-bg: #f4d6cc;      --bad-edge: #d79a86;
+  --info-ink: #274a8c;     --info-bg: #dbe4f3;     --info-edge: #9db2d8;
+  --neutral-ink: #4a3f37;  --neutral-bg: #eadfd3;  --neutral-edge: rgba(74, 48, 28, .28);
+  --danger: #8e2a1b;       --danger-hover: #72200f;
+
+  /* ---- type ---- */
+  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Hoefler Text", "Times New Roman", serif;
+  --sans: "Jost", "Futura", "Avenir Next", "Century Gothic", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: .75rem;    /* 12px — the floor for any text */
+  --fs-sm: .875rem;   /* 14px */
+  --fs-md: 1rem;      /* 16px — body */
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-h3: 1.4rem;
+  --fs-h2: clamp(1.7rem, 2.6vw, 2.15rem);
+  --fs-h1: clamp(2.3rem, 4.6vw, 3.6rem);
+  --lh: 1.6;
+
+  /* ---- space, shape, depth ---- */
+  --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --radius-pill: 999px;
+  --shadow-1: 0 1px 0 rgba(74, 48, 28, .06), 0 10px 24px -18px rgba(60, 36, 18, .45);
+  --shadow-2: 0 2px 0 rgba(74, 48, 28, .05), 0 24px 48px -28px rgba(60, 36, 18, .55);
+  --focus: 0 0 0 2px var(--paper-2), 0 0 0 4px var(--ink);
+  --header-h: 4rem;
+
+  /* ---- world (overridden by .world-* on <body>) ---- */
+  --accent: var(--sepia);          /* links, rules, active states */
+  --accent-2: var(--gold);         /* ornaments */
+  --accent-soft: var(--gold-2);
+  --heading: var(--ink);
+  --panel-radius: var(--radius);
+  --btn-radius: var(--radius-pill);
+  --label-font: var(--sans);
+  --paper-tint: transparent;       /* a wash over the fresco */
+}
+
+/* BIO / SEED — the human world leads: warm, botanical, rounded */
+.world-bio, .world-seed {
+  --accent: var(--sepia);
+  --accent-2: var(--sage);
+  --accent-soft: var(--gold-2);
+  --panel-radius: 12px;
+  --btn-radius: var(--radius-pill);
+  --paper-tint: rgba(240, 207, 149, .16);
+}
+/* CORE — both worlds, approachable */
+.world-core {
+  --accent: var(--sepia);
+  --accent-2: var(--blue);
+  --accent-soft: var(--gold-2);
+  --panel-radius: 10px;
+  --btn-radius: var(--radius-pill);
+  --paper-tint: rgba(240, 207, 149, .08);
+}
+/* FRONTIER — both worlds, structured and a shade cooler */
+.world-frontier {
+  --accent: var(--indigo);
+  --accent-2: var(--sepia);
+  --accent-soft: var(--blue);
+  --panel-radius: 6px;
+  --btn-radius: 6px;
+  --paper-tint: rgba(167, 178, 196, .10);
+}
+/* OS / FORGE / admin / judging — the machine leads: exact, graphite, square */
+.world-os, .world-forge, .world-admin {
+  --ink-2: #2f3442;
+  --ink-3: #434a5a;            /* 5.7:1 on the cool paper */
+  --ink-4: #4d5465;            /* 4.9:1 */
+  --heading: #1e222d;
+  --accent: var(--blue-text);
+  --accent-2: var(--indigo);
+  --accent-soft: var(--blue);
+  --rule: rgba(43, 51, 72, .16);
+  --rule-2: rgba(43, 51, 72, .30);
+  --rule-3: rgba(43, 51, 72, .52);
+  --field-edge: #656c7b;       /* ≥ 3.3:1 on the cool paper and panels */
+  --paper-2: #f6f2ec;          /* the same paper as every other page, a shade cooler */
+  --paper-3: #ebe5dc;
+  --paper-4: #fcfaf6;
+  --neutral-bg: #ebe6df;
+  --panel-radius: 3px;
+  --radius: 3px;
+  --btn-radius: 3px;
+  --label-font: var(--mono);
+  --paper-tint: rgba(167, 178, 196, .16);
+}
+

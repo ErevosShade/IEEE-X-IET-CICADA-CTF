@@ -1,0 +1,79 @@
+---
+// Shared SVG sprite — reusable symbols referenced via <use href="#id">
+// Loaded once in Base.astro; used site-wide via <use href="#...">
+---
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- IEEE Glyphs -->
+    <path id="g-I1" fill="none" d="M617 194.3V294.3"/>
+    <path id="g-E1" fill="none" d="M683 194.3H647V294.3H683M647 244.3H677"/>
+    <path id="g-E2" fill="none" d="M735 194.3H699V294.3H735M699 244.3H729"/>
+    <path id="g-E3" fill="none" d="M787 194.3H751V294.3H787M751 244.3H781"/>
+
+    <!-- CICADE Sub-word Glyphs -->
+    <path id="g-C1" fill="none" d="M764.7 325.5A13.5 13.5 0 1 0 764.7 344.5"/>
+    <path id="g-I-sub" fill="none" d="M778.7 320.0V350.0"/>
+    <path id="g-C2" fill="none" d="M812.7 325.5A13.5 13.5 0 1 0 812.7 344.5"/>
+    <!-- Center Letter A divided seamlessly at X=836.7 -->
+    <path id="g-A-left" fill="none" d="M836.7 320.0L826.7 350.0M831.3 339.5H836.7"/>
+    <path id="g-A-right" fill="none" d="M836.7 320.0L846.7 350.0M836.7 339.5H842.1"/>
+    <!-- D and Final A -->
+    <path id="g-D1" fill="none" d="M860.7 320.0V350.0M860.7 320.0H870.7C880.7 320.0 880.7 350.0 870.7 350.0H860.7"/>
+    <path id="g-A2" fill="none" d="M894.7 350.0L904.7 320.0L914.7 350.0M899.3 339.5H910.1"/>
+
+    <!-- Cross / Nexus Glyphs -->
+    <path id="g-X1" fill="none" d="M806.7 214.6L866.7 274.6"/>
+    <path id="g-X2" fill="none" d="M866.7 214.6L806.7 274.6"/>
+
+    <!-- IET Glyphs -->
+    <path id="g-I2" fill="none" d="M886 194.3V294.3"/>
+    <path id="g-E4" fill="none" d="M952 194.3H916V294.3H952M916 244.3H946"/>
+    <path id="g-T1" fill="none" d="M972 194.3H1038M1005 194.3V294.3"/>
+
+    <clipPath id="lg-half" clipPathUnits="userSpaceOnUse"><path d="M836.7 188.9A55.7 55.7 0 0 1 836.7 300.3Z"/></clipPath>
+    <radialGradient id="lg-bead" cx=".42" cy=".38" r=".7">
+      <stop offset="0" stop-color="#a4d1ff"/>
+      <stop offset=".45" stop-color="#2c82e6"/>
+      <stop offset="1" stop-color="#d47037"/>
+    </radialGradient>
+
+    <symbol id="cicada-logo" viewBox="590 164 470 162">
+      <image class="lg-fill" href="/static/theme/art/o-fill.webp" x="779.2" y="187.1" width="115" height="115" preserveAspectRatio="none" clip-path="url(#lg-half)"/>
+      <path class="lg-line" fill="none" stroke="#2e85e0" stroke-width="1.6" stroke-opacity=".72" d="M836.7 167V323"/>
+      <!-- IEEE -->
+      <use class="lg-glyph" href="#g-I1" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <use class="lg-glyph" href="#g-E1" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <use class="lg-glyph" href="#g-E2" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <use class="lg-glyph" href="#g-E3" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <!-- Nexus Cross -->
+      <path stroke="#16120f" stroke-width="2.6" stroke-linecap="round" d="M806.7 202.6L866.7 286.6M866.7 202.6L806.7 286.6"/>
+      <!-- IET -->
+      <use class="lg-glyph" href="#g-I2" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <use class="lg-glyph" href="#g-E4" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+      <use class="lg-glyph" href="#g-T1" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8"/>
+    </symbol>
+
+    <symbol id="o-art" viewBox="772 164 129.4 162">
+      <image class="lg-fill" href="/static/theme/art/o-fill.webp" x="779.2" y="187.1" width="115" height="115" preserveAspectRatio="none" clip-path="url(#lg-half)"/>
+      <path class="lg-line" fill="none" stroke="#b0793a" stroke-width="1.6" stroke-opacity=".72" d="M836.7 167V323"/>
+      <circle class="lg-glyph" fill="none" stroke="#16120f" stroke-width="2.6" stroke-linejoin="miter" stroke-miterlimit="8" cx="836.7" cy="244.6" r="56.8"/>
+      <circle class="lg-bead" fill="url(#lg-bead)" cx="836.7" cy="244.6" r="6.6"/>
+    </symbol>
+
+    <symbol id="o-mini" viewBox="-62 -62 124 124">
+      <path class="o-mini__fill" d="M0-55.7A55.7 55.7 0 0 1 0 55.7Z"/>
+      <circle class="o-mini__ring" r="56.8"/>
+      <path class="o-mini__axis" d="M0-56.8V56.8"/>
+      <circle class="o-mini__dot" r="7"/>
+    </symbol>
+
+    <symbol id="o-mode" viewBox="-62 -62 124 124">
+      <path class="o-mode__left" d="M0-55.7A55.7 55.7 0 0 0 0 55.7Z"/>
+      <path class="o-mode__right" d="M0-55.7A55.7 55.7 0 0 1 0 55.7Z"/>
+      <circle class="o-mode__ring" r="56.8"/>
+      <path class="o-mode__axis" d="M0-56.8V56.8"/>
+    </symbol>
+
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  </defs>
+</svg>

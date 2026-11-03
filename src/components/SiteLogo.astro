@@ -1,0 +1,23 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+const { href = '/', label = 'IEEE × IET CICADE, home', size = 'md' } = Astro.props;
+const dims = { sm: { w: 99, h: 50 }, md: { w: 124, h: 44 }, lg: { w: 138, h: 48 } }[size];
+---
+<a class="brand" href={href}>
+  <svg
+    class="brand__logo"
+    viewBox="590 164 470 162"
+    width={dims.w}
+    height={dims.h}
+    role="img"
+    aria-label={label}
+    focusable="false"
+  >
+    <use href="#cicada-logo"/>
+  </svg>
+  <span class="brand__sub">IEEE × IET<br/>CICADE</span>
+</a>

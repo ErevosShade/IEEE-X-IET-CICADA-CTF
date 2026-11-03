@@ -1,0 +1,72 @@
+---
+interface Props {
+  currentPage?: string;
+}
+const { currentPage = '' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/guide', label: 'Guide' },
+  { href: '/announcements', label: 'Announcements' },
+  { href: '/tracks', label: 'Tracks' },
+  { href: '/sponsors', label: 'Sponsors' },
+];
+---
+<header class="site-header site-header--home">
+  <div class="site-header__bar">
+    <a class="brand" href="/">
+      <svg class="brand__logo" viewBox="590 164 470 162" width="124" height="44" role="img" aria-label="IEEE × IET CICADE, home" focusable="false">
+        <use href="#cicada-logo"/>
+      </svg>
+      <span class="brand__sub">IEEE × IET<br/>CICADE</span>
+    </a>
+
+    <nav class="nav-primary" aria-label="Primary">
+      <ul>
+        {navLinks.map(link => (
+          <li>
+            <a
+              class="nav-link"
+              href={link.href}
+              aria-current={currentPage === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button
+        id="mobile-menu-button"
+        class="nav-toggle nav-toggle--guest"
+        type="button"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span class="nav-toggle__icon" aria-hidden="true"><span></span></span>
+        <span class="nav-toggle__label">Menu</span>
+      </button>
+
+      <nav id="mobile-menu" class="nav-menu hidden" aria-label="Pages">
+        <div class="nav-menu__group nav-menu__group--pages">
+          <p class="nav-menu__title">Explore</p>
+          <ul>
+            {navLinks.map((link, i) => (
+              <li style={`--i: ${i}`}>
+                <a
+                  class="nav-menu__link"
+                  href={link.href}
+                  aria-current={currentPage === link.href ? 'page' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

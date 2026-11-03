@@ -1,0 +1,81 @@
+/* ==========================================================================
+   CICADA design system · 4/5 · worlds
+   The BIO ⟷ OS spectrum applied to pages. Set one class on <body>:
+     world-seed (Init · SEED)     the human world leads, the machine is a faint blueprint
+     world-core (Basic · CORE)    both worlds, approachable
+     world-frontier (Overclocked · FRONTIER)  both worlds, structured
+     world-forge (Industry · FORGE)  the machine leads, the human is a faint underdrawing
+     world-public                 editorial and account pages: balanced
+     world-admin / world-os       operational screens: the precise OS system
+   ========================================================================== */
+
+/* ---------- motifs ---------- */
+.sprig { display: inline-block; width: 2.6rem; height: .95rem; flex: none; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M1 8C10 7 20 9 37 6' fill='none' stroke='%239a6a36' stroke-width='.9' stroke-linecap='round'/%3E%3Cpath d='M11 7.6Q14 2 19 3Q16 7 11 7.6ZM20 8.2Q24 13 29 11.5Q25 8 20 8.2ZM27 6.9Q30 1.6 35 2.7Q32 6.3 27 6.9Z' fill='%2366785f' fill-opacity='.55'/%3E%3Ccircle cx='37.5' cy='6' r='1.6' fill='%23c9624a'/%3E%3C/svg%3E"); }
+.trace { display: inline-block; width: 2.6rem; height: .95rem; flex: none; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M2.5 7H18L22 3H33.5' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3Crect x='33.5' y='.5' width='5' height='5' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3Ccircle cx='2.5' cy='7' r='1.5' fill='%233d5a9c'/%3E%3C/svg%3E"); }
+/* registration corners, as on a drawing sheet */
+.reg-corners { --cm: rgba(43, 63, 124, .5); background:
+  linear-gradient(var(--cm), var(--cm)) 0 0 / 11px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 0 0 / 1px 11px no-repeat,
+  linear-gradient(var(--cm), var(--cm)) 100% 100% / 11px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 100% 100% / 1px 11px no-repeat; }
+
+/* the eyebrow carries its world: a sprig for life, a routed trace for computation */
+.world-seed .eyebrow::after, .world-bio .eyebrow::after, .world-core .eyebrow::after, .world-public .eyebrow::after { content: ""; display: inline-block; width: 2.6rem; height: .95rem; background: inherit; }
+.world-seed .eyebrow::after, .world-bio .eyebrow::after, .world-public .eyebrow::after { background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M1 8C10 7 20 9 37 6' fill='none' stroke='%239a6a36' stroke-width='.9' stroke-linecap='round'/%3E%3Cpath d='M11 7.6Q14 2 19 3Q16 7 11 7.6ZM20 8.2Q24 13 29 11.5Q25 8 20 8.2ZM27 6.9Q30 1.6 35 2.7Q32 6.3 27 6.9Z' fill='%2366785f' fill-opacity='.55'/%3E%3Ccircle cx='37.5' cy='6' r='1.6' fill='%23c9624a'/%3E%3C/svg%3E"); }
+.world-core .eyebrow::after { background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M1 7.4C6 6.2 11 8.4 19 7' fill='none' stroke='%239a6a36' stroke-width='.9' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='7' r='1.6' fill='%23cf9844'/%3E%3Cpath d='M21 7H34' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3Crect x='34' y='4.5' width='5' height='5' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3C/svg%3E"); }
+.world-frontier .eyebrow::after, .world-forge .eyebrow::after, .world-os .eyebrow::after, .world-admin .eyebrow::after { content: ""; display: inline-block; width: 2.6rem; height: .95rem; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M2.5 7H18L22 3H33.5' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3Crect x='33.5' y='.5' width='5' height='5' fill='none' stroke='%233d5a9c' stroke-width='.9'/%3E%3Ccircle cx='2.5' cy='7' r='1.5' fill='%233d5a9c'/%3E%3C/svg%3E"); }
+.world-forge .eyebrow, .world-os .eyebrow, .world-admin .eyebrow { color: var(--ink-3); }
+.eyebrow__num { color: var(--accent); }
+.world-seed .eyebrow__num, .world-bio .eyebrow__num { font: italic 500 1.05rem/1 var(--serif); letter-spacing: .02em; text-transform: none; }
+
+/* headings: an italic accent word takes its world's colour */
+h1 em, h2 em, .lede em { font-style: italic; color: var(--accent); }
+em.w-bio, .w-bio { color: var(--sepia); }
+em.w-os, .w-os { color: var(--indigo); }
+em.w-mid, .w-mid { color: var(--gold-text); }
+
+/* panels: warm top edge in BIO worlds, registration corners in OS worlds */
+.world-seed .panel--accent, .world-bio .panel--accent { border-top-color: var(--sage); }
+.world-os .panel--reg, .world-admin .panel--reg, .world-forge .panel--reg { background-color: var(--paper-2); }
+.world-os .panel--reg::after, .world-admin .panel--reg::after, .world-forge .panel--reg::after,
+.world-frontier .panel--reg::after { content: ""; position: absolute; inset: 6px; pointer-events: none; --cm: rgba(43, 63, 124, .45); background:
+  linear-gradient(var(--cm), var(--cm)) 0 0 / 10px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 0 0 / 1px 10px no-repeat,
+  linear-gradient(var(--cm), var(--cm)) 100% 0 / 10px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 100% 0 / 1px 10px no-repeat,
+  linear-gradient(var(--cm), var(--cm)) 0 100% / 10px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 0 100% / 1px 10px no-repeat,
+  linear-gradient(var(--cm), var(--cm)) 100% 100% / 10px 1px no-repeat, linear-gradient(var(--cm), var(--cm)) 100% 100% / 1px 10px no-repeat; }
+
+/* OS grounds carry faint graph paper; it sits on the fixed fresco layer, never behind moving text */
+.world-os::after, .world-admin::after, .world-forge::after {
+  background: radial-gradient(circle, rgba(43, 63, 124, .12) .75px, transparent 1.25px) 0 0 / 22px 22px, var(--paper-tint);
+}
+.world-seed::after, .world-bio::after { background: var(--paper-tint); }
+
+/* ---------- admin shell ---------- */
+.admin-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.admin-nav { position: relative; }
+.admin-nav__list { display: flex; gap: .15rem; overflow-x: auto; list-style: none; padding: .3rem; border: 1px solid var(--rule); border-radius: 3px; background: rgba(245, 243, 240, .85); scrollbar-width: thin; }
+.admin-nav__list li { margin: 0; flex: none; }
+.admin-nav__list a { display: inline-flex; align-items: center; min-height: 2.25rem; padding: .3rem .7rem; border-radius: 2px; font: 500 .72rem/1.2 var(--mono); letter-spacing: .03em; color: var(--ink-2); text-decoration: none; white-space: nowrap; }
+.admin-nav__list a:hover { background: rgba(61, 105, 189, .08); color: var(--ink); }
+.admin-nav__list a[aria-current="page"] { background: #1e2433; color: #eef0f5; }
+.hub { display: grid; gap: var(--s-2); grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); list-style: none; padding: 0; }
+.hub li { margin: 0; }
+.hub a { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); min-height: 3.25rem; padding: .7rem .95rem; border: 1px solid var(--rule); border-radius: 3px; background: var(--paper-2); color: var(--ink); text-decoration: none; font-weight: 500; }
+.hub a::after { content: "→"; color: var(--ink-4); }
+.hub a:hover { border-color: var(--rule-3); background: #fff; }
+.hub a:hover::after { color: var(--accent); }
+
+/* review queues (registrations, screening, SPOC) */
+.review-list { display: grid; gap: var(--s-3); }
+.review-entry { position: relative; padding: var(--s-4) var(--s-5); background: var(--paper-2); border: 1px solid var(--rule); border-radius: var(--panel-radius); }
+.review-entry__head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--s-3) var(--s-4); }
+.review-entry__main { flex: 1 1 16rem; min-width: 0; }
+.review-entry__title { font-weight: 600; font-size: var(--fs-lg); color: var(--ink); }
+.review-entry__meta { font-size: var(--fs-sm); color: var(--ink-3); overflow-wrap: anywhere; }
+.review-entry__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+.review-entry__actions form { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin: 0; }
+.review-entry[data-status="approved"] { border-left: 3px solid var(--ok-edge); }
+.review-entry[data-status="rejected"] { border-left: 3px solid var(--bad-edge); }
+.review-entry[data-status="pending"] { border-left: 3px solid var(--pending-edge); }
+
+/* judging: a precise, calm instrument */
+.score-grid { display: grid; gap: var(--s-3); }
+.score-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-3); align-items: center; padding: var(--s-3) 0; border-top: 1px solid var(--rule); }
