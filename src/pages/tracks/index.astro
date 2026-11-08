@@ -1,0 +1,152 @@
+---
+import { getCollection } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+
+const tracks = (await getCollection('tracks')).sort((a, b) => a.data.index - b.data.index);
+
+const modeColors: Record<string, string> = {
+  seed: 'seed',
+  core: 'core',
+  frontier: 'frontier',
+  forge: 'forge',
+  open: 'core',
+  research: 'frontier',
+};
+
+const statusLabels: Record<string, string> = {
+  open: 'Open',
+  closed: 'Closed',
+  'invite-only': 'Invite only',
+  'coming-soon': 'Coming soon',
+};
+
+const statusBadge: Record<string, string> = {
+  open: 'badge--ok',
+  closed: 'badge--closed',
+  'invite-only': 'badge--pending',
+  'coming-soon': 'badge--info',
+};
+---
+<Page
+  title="Participation Modes — IEEE × IET CICADE"
+  bodyClass="world-public page-tracks"
+  currentPage="/tracks"
+  extraStyles={['/styles/tracks.css']}
+>
+  <div class="tracks" data-tracks data-active="all">
+    <!-- Background blueprints -->
+    <div class="tracks__stage" id="tracks-prints" aria-hidden="true">
+      <div class="tracks__tint tracks__tint--warm"></div>
+      <div class="tracks__tint tracks__tint--blend"></div>
+      <div class="tracks__tint tracks__tint--cool"></div>
+      <img
+        class="tracks__print tracks__print--bio"
+        src="/static/theme/art/blueprint-human.webp"
+        width="842" height="941" alt="" decoding="sync" fetchpriority="high"
+      />
+      <img
+        class="tracks__print tracks__print--os"
+        src="/static/theme/art/blueprint-machine.webp"
+        width="830" height="941" alt="" decoding="sync" fetchpriority="high"
+      />
+    </div>
+
+    <div class="tracks__column">
+      <!-- Overview header -->
+      <header class="tracks__head" id="tracks-intro" data-slide data-slide-name="Overview" aria-label="Overview">
+        <p class="eyebrow">
+          <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+          <span>Participation modes</span>
+        </p>
+        <h1>Choose your mode</h1>
+        <p class="lede">
+          Each team competes in exactly one main mode: SEED, CORE, FRONTIER or invitation-only FORGE.
+          Pick the level that matches your experience and ambition.
+        </p>
+      </header>
+
+      <!-- Mode picker navigation -->
+      <nav class="tracks__picker" aria-label="Participation modes">
+        <ol>
+          {tracks.map(track => (
+            <li>
+              <a
+                class={`tracks__pick tracks__pick--${modeColors[track.data.mode]}`}
+                href={`#track-${track.slug}`}
+                data-track-link
+              >
+                {track.data.title}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <!-- Track cards -->
+      <div class="tracks__list">
+        {tracks.map((track, i) => (
+          <section
+            class={`track track--${modeColors[track.data.mode]}`}
+            id={`track-${track.slug}`}
+            data-track={modeColors[track.data.mode]}
+            data-slide
+            data-slide-name={track.data.title}
+            aria-labelledby={`mode-${track.slug}`}
+          >
+            <p class="track__index">
+              {String(i + 1).padStart(2, '0')}
+              <span aria-hidden="true"> / </span>
+              <span class="sr-only">of </span>
+              {String(tracks.length).padStart(2, '0')}
+            </p>
+            <div class="track__badges">
+              <span class={`mode-badge mode-badge--${modeColors[track.data.mode]}`}>
+                <svg class="mode-badge__o" aria-hidden="true" focusable="false"><use href="#o-mode"/></svg>
+                {track.data.title}
+              </span>
+              <span class={`badge ${statusBadge[track.data.status]}`}>
+                {statusLabels[track.data.status]}
+              </span>
+            </div>
+            <h2 class="track__title" id={`mode-${track.slug}`}>{track.data.title}</h2>
+            <p class="track__tagline">{track.data.tagline}</p>
+
+            {track.data.facts.length > 0 && (
+              <ul class="track__facts">
+                {track.data.facts.map(fact => (
+                  <li><span set:html={fact} /></li>
+                ))}
+              </ul>
+            )}
+
+            <div class="track__foot">
+              {track.data.status === 'open' && track.data.registrationUrl && (
+                <a href={track.data.registrationUrl} class="btn btn--primary">
+                  {track.data.title} registration
+                </a>
+              )}
+              {track.data.status === 'invite-only' && (
+                <p class="track__note">This track is by invitation only.</p>
+              )}
+              {track.data.status === 'closed' && (
+                <p class="track__note">Registration is currently closed.</p>
+              )}
+              {track.data.statementsUrl && (
+                <a class="track__statements" href={track.data.statementsUrl}>
+                  {track.data.title} screening statements<span aria-hidden="true"> →</span>
+                </a>
+              )}
+              {track.data.hackathonStatementsUrl && (
+                <a class="track__statements" href={track.data.hackathonStatementsUrl}>
+                  {track.data.title} hackathon statements<span aria-hidden="true"> →</span>
+                </a>
+              )}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div><!-- /tracks__column -->
+  </div><!-- /tracks -->
+
+  <script is:inline src="/scripts/tracks.js"></script>
+</Page>

@@ -1,0 +1,89 @@
+---
+import OrnamentSprite from '../components/OrnamentSprite.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+  prefetchImages?: { href: string; type?: string }[];
+  extraStyles?: string[];
+  extraScripts?: string[];
+  viewTransitions?: boolean;
+}
+
+const {
+  title = 'IEEE × IET CICADE — Advancing Technology & Engineering the Future',
+  description = 'CICADE is the collaborative CTF hackathon hosted jointly by IEEE and IET Student Chapters at Thapar Institute of Engineering & Technology.',
+  bodyClass = '',
+  prefetchImages = [],
+  extraStyles = [],
+  extraScripts = [],
+  viewTransitions = true,
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#050508" />
+  <meta name="color-scheme" content="dark" />
+
+  <!-- Font preloads -->
+  <link rel="preload" href="/static/theme/fonts/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/static/theme/fonts/cormorant-garamond-latin-300-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Design-system CSS -->
+  <link rel="stylesheet" href="/styles/tokens.css" />
+  <link rel="stylesheet" href="/styles/base.css" />
+  <link rel="stylesheet" href="/styles/components.css" />
+  <link rel="stylesheet" href="/styles/worlds.css" />
+  <link rel="stylesheet" href="/styles/pages.css" />
+  <link rel="stylesheet" href="/styles/cicade-custom.css" />
+
+  <!-- Per-page extra stylesheets -->
+  {extraStyles.map(href => <link rel="stylesheet" href={href} />)}
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- App JS -->
+  <script is:inline>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+  <script src="/scripts/app.js" defer is:inline></script>
+
+  <!-- Per-page extra scripts -->
+  {extraScripts.map(src => <script src={src} defer is:inline></script>)}
+
+  <!-- Prefetch images -->
+  {prefetchImages.map(img => (
+    <link rel="prefetch" href={img.href} as="image" type={img.type || 'image/webp'} />
+  ))}
+
+  <!-- View Transitions API -->
+  {viewTransitions && (
+    <style>{'@view-transition { navigation: auto; } @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }'}</style>
+  )}
+</head>
+
+<body
+  class={bodyClass}
+  data-oversize-message="{label} exceeds the {mb} MB limit. Choose a smaller file; the rest of your form has been preserved."
+>
+  <div class="cyber-scanlines" aria-hidden="true"></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Global SVG sprite (defs only, zero layout cost) -->
+  <OrnamentSprite />
+
+  <slot />
+</body>
+</html>

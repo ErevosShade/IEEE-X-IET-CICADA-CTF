@@ -1,0 +1,165 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const goldSponsors = [
+  {
+    name: "Tin Computer",
+    kicker: "Cloud & Compute Partner",
+    description: "Cloud compute and infrastructure tailored for developers. Tin Computer delivers instant instances and managed GPU pipelines for intensive workloads.",
+    offer: "Up to 60 eligible CICADE teams receive $299 in Tin Computer credits, covering one month of Growth tier compute.",
+    link: "https://tin.computer",
+    badge: "Gold Partner"
+  },
+  {
+    name: "Momen",
+    kicker: "Visual Full-Stack & AI Builder",
+    description: "Momen is a visual full-stack app builder with integrated data, logic, deployment and AI tools. Teams design and ship production apps in one continuous workspace.",
+    offer: "Every CICADE participant receives $100 in Momen credits; winning project receives $2,000 cash grant plus direct mentor access.",
+    link: "https://momen.app",
+    badge: "Gold Partner"
+  },
+  {
+    name: "MojoAuth",
+    kicker: "Authentication & Security Partner",
+    description: "Modern passwordless authentication for high-scale applications. Developers add passkeys, one-time codes, and magic links with zero hassle.",
+    offer: "Lifetime licenses for winning CICADE teams, valued at over $7,200 across five years.",
+    link: "https://mojoauth.com",
+    badge: "Gold Partner"
+  }
+];
+
+const ecosystemPartners = [
+  {
+    name: "n8n",
+    kicker: "Workflow Automation Partner",
+    description: "Fair-code workflow automation tool connecting complex microservices, AI models, and APIs with custom logic.",
+    offer: "Paid n8n licenses and cloud credits for all shortlisted offline hackathon finalists.",
+    link: "https://n8n.io",
+  },
+  {
+    name: "Langfuse",
+    kicker: "LLM Observability Partner",
+    description: "Open-source LLM engineering platform for tracing, evaluations, prompt management, and metrics.",
+    offer: "Access to enterprise evaluation features and observability grants for all AI track finalists.",
+    link: "https://langfuse.com",
+  },
+  {
+    name: "TechnoTribes",
+    kicker: "Industry Pipeline Partner",
+    description: "Bespoke software architecture and AI workflow integration studio for enterprise scale.",
+    offer: "PPIs, interview fast-tracks, and Buildify credits for top-performing engineers.",
+    link: "https://technotribes.ai",
+  },
+  {
+    name: ".xyz Domains",
+    kicker: "Domain & Web3 Partner",
+    description: "The global domain extension empowering the next generation of builders, innovators, and internet pioneers.",
+    offer: "Free 1-year premium .xyz domains and DNS tooling for all participating projects.",
+    link: "https://gen.xyz",
+  },
+  {
+    name: "Interview Cake & Buddy",
+    kicker: "Career Accelerator Partner",
+    description: "Technical interview preparation and algorithmic mastery platform created by veteran silicon-valley engineers.",
+    offer: "Free technical coaching modules and mock interview passes worth ₹19.9 Lakhs+ combined.",
+    link: "https://interviewcake.com",
+  }
+];
+---
+<Page
+  title="Sponsors & Partners — IEEE × IET CICADE"
+  bodyClass="world-public page-sponsors"
+  currentPage="/sponsors"
+>
+  <div class="shell page">
+    <header class="page-head">
+      <p class="eyebrow">
+        <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+        <span>Partners &amp; Benefactors</span>
+      </p>
+      <h1>Backed by Industry Pioneers</h1>
+      <p class="lede">
+        CICADE is co-powered by leading technology firms, cloud providers, and developer platforms offering over <strong>₹12.75 Lakhs</strong> in prizes, compute, licenses, and direct career fast-tracks.
+      </p>
+    </header>
+
+    <div class="sponsors-page">
+      <!-- Gold Tier -->
+      <section class="sponsor-tier sponsor-tier--gold">
+        <div class="sponsor-tier__heading">
+          <span class="sponsor-tier__number">01</span>
+          <h2>Flagship Partners</h2>
+        </div>
+        <div class="sponsor-tier__grid">
+          {goldSponsors.map(sponsor => (
+            <article class="sponsor-profile" data-sponsor={sponsor.name}>
+              <div class="sponsor-profile__media">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle, rgba(207,152,68,0.15) 0%, transparent 70%);">
+                  <span style="font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--gold-text); letter-spacing: 0.05em;">
+                    {sponsor.name}
+                  </span>
+                </div>
+              </div>
+              <div class="sponsor-profile__body">
+                <p class="sponsor-profile__kicker">{sponsor.kicker}</p>
+                <h3>{sponsor.name}</h3>
+                <p class="sponsor-profile__description">{sponsor.description}</p>
+                <details class="sponsor-profile__offer" open>
+                  <summary>CICADE Offer</summary>
+                  <p>{sponsor.offer}</p>
+                </details>
+                <a class="sponsor-profile__link" href={sponsor.link} target="_blank" rel="noopener noreferrer">
+                  Visit {sponsor.name} <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Ecosystem Tier -->
+      <section class="sponsor-tier sponsor-tier--industry">
+        <div class="sponsor-tier__heading">
+          <span class="sponsor-tier__number">02</span>
+          <h2>Ecosystem &amp; Tooling Partners</h2>
+        </div>
+        <div class="sponsor-tier__grid">
+          {ecosystemPartners.map(partner => (
+            <article class="sponsor-profile sponsor-profile--additional" data-sponsor={partner.name}>
+              <div class="sponsor-profile__media" style="max-height: 5rem;">
+                <span style="font-family: var(--mono); font-size: 1.2rem; font-weight: 600; color: var(--blue-text);">
+                  {partner.name}
+                </span>
+              </div>
+              <div class="sponsor-profile__body">
+                <p class="sponsor-profile__kicker">{partner.kicker}</p>
+                <h3>{partner.name}</h3>
+                <p class="sponsor-profile__description">{partner.description}</p>
+                <details class="sponsor-profile__offer">
+                  <summary>Partner Perk</summary>
+                  <p>{partner.offer}</p>
+                </details>
+                <a class="sponsor-profile__link" href={partner.link} target="_blank" rel="noopener noreferrer">
+                  Learn more <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <!-- Sponsor Callout -->
+      <div class="panel panel--lifted" style="margin-top: var(--s-8); max-width: 48rem;">
+        <span class="badge badge--ok" style="margin-bottom: var(--s-3);">Sponsorship Open</span>
+        <h2>Partner with CICADE 2026</h2>
+        <p>
+          Connect with 500+ top engineering candidates, run targeted challenge statements, and showcase your developer tooling to a curated collegiate talent pool at Thapar Institute.
+        </p>
+        <div class="cluster" style="margin-top: var(--s-4);">
+          <a class="btn btn--primary" href="mailto:sponsors@cicade.thapar.edu">Request Sponsor Prospectus</a>
+          <a class="btn btn--secondary" href="https://discord.gg/SsVuHQzX8" target="_blank" rel="noopener">Join Discord</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Page>

@@ -1,0 +1,116 @@
+/* ==========================================================================
+   CICADE DESIGN SYSTEM — SCI-FI / HACKING MYSTERY MOVIE (BLACK & RED)
+   Theme: Deep Obsidian Void, Crimson Red Laser, Cyber Cyan (IEEE) & Vivid Magenta (IET)
+   ========================================================================== */
+
+/* ---------- Self-hosted fonts ---------- */
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("/static/theme/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Jost"; src: url("/static/theme/fonts/jost-latin-wght-normal.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Mono"; src: url("/static/theme/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  /* ---- Void & Cyber Steel (Dark Sci-Fi Palette) ---- */
+  --paper: #050508;              /* Deep obsidian void */
+  --paper-2: #0b0c14;            /* Dark cyber panel */
+  --paper-3: #111220;            /* Recessed card / well */
+  --paper-4: #16182a;            /* Input field background */
+
+  /* ---- Typography Colors ---- */
+  --ink: #ffffff;                /* Primary headings */
+  --ink-2: #e2e8f0;              /* High-contrast body text */
+  --ink-3: #94a3b8;              /* Secondary tech metadata */
+  --ink-4: #64748b;              /* Captions and timestamps */
+
+  /* ---- Sci-Fi Hacking Accent Core (Blood / Crimson Red) ---- */
+  --red-core: #ff003c;
+  --red-neon: #ff1744;
+  --red-dark: #80001a;
+  --red-glow: rgba(255, 0, 60, 0.45);
+  --red-glow-soft: rgba(255, 0, 60, 0.15);
+
+  /* ---- Left World: IEEE (Cyber-Intelligence & Silicon) ---- */
+  --ieee-cyan: #00f0ff;
+  --ieee-blue: #0070f3;
+  --ieee-glow: rgba(0, 240, 255, 0.4);
+  --ieee-dark: #040914;
+
+  /* ---- Right World: IET (Kinetic Systems & Cyber-Physical) ---- */
+  --iet-magenta: #ec4899;
+  --iet-violet: #a855f7;
+  --iet-glow: rgba(236, 72, 153, 0.4);
+  --iet-dark: #12051a;
+
+  /* ---- Nexus Intersection (CICADE) ---- */
+  --nexus-gold: #ffb703;
+  --nexus-grad: linear-gradient(135deg, #00f0ff 0%, #ff003c 50%, #ec4899 100%);
+  --red-laser-grad: linear-gradient(180deg, transparent 0%, #ff003c 20%, #ff1744 50%, #ff003c 80%, transparent 100%);
+
+  /* ---- Hairlines, Borders & Dividers ---- */
+  --rule: rgba(255, 0, 60, 0.18);
+  --rule-2: rgba(255, 0, 60, 0.35);
+  --rule-3: rgba(255, 0, 60, 0.65);
+  --field-edge: #334155;
+
+  /* ---- Legacy variable mappings for clean component support ---- */
+  --sepia: var(--red-core);
+  --sepia-text: var(--red-neon);
+  --gold: var(--nexus-gold);
+  --gold-text: var(--nexus-gold);
+  --gold-2: #ffd166;
+  --coral: var(--red-core);
+  --coral-text: var(--red-neon);
+  --sage: #00f0ff;
+  --sage-text: #00f0ff;
+  --blue: var(--ieee-cyan);
+  --blue-text: var(--ieee-cyan);
+  --indigo: var(--iet-violet);
+  --graphite: #1e293b;
+  --cyanotype: #0284c7;
+  --sanguine: #e11d48;
+
+  /* ---- Badge & Status Tokens ---- */
+  --pending-ink: #fef08a;  --pending-bg: rgba(234, 179, 8, 0.15);  --pending-edge: #eab308;
+  --ok-ink: #86efac;       --ok-bg: rgba(34, 197, 94, 0.15);     --ok-edge: #22c55e;
+  --bad-ink: #fca5a5;      --bad-bg: rgba(239, 68, 68, 0.2);     --bad-edge: #ef4444;
+  --info-ink: #7dd3fc;     --info-bg: rgba(14, 165, 233, 0.15);   --info-edge: #0ea5e9;
+  --neutral-ink: #cbd5e1;  --neutral-bg: #1e2235;                 --neutral-edge: rgba(255, 255, 255, 0.12);
+  --danger: #ff003c;       --danger-hover: #e11d48;
+
+  /* ---- Type Hierarchy ---- */
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Jost", "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: .75rem;
+  --fs-sm: .875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-h3: 1.4rem;
+  --fs-h2: clamp(1.7rem, 2.6vw, 2.15rem);
+  --fs-h1: clamp(2.3rem, 4.6vw, 3.6rem);
+  --lh: 1.6;
+
+  /* ---- Space, Shape & Depth ---- */
+  --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --radius: 6px;
+  --radius-sm: 3px;
+  --radius-pill: 999px;
+  --shadow-1: 0 4px 20px rgba(0, 0, 0, 0.7);
+  --shadow-2: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 0, 60, 0.2);
+  --focus: 0 0 0 2px var(--paper-2), 0 0 0 4px var(--red-neon);
+  --header-h: 4rem;
+
+  /* ---- Active Theme Tokens ---- */
+  --accent: var(--red-core);
+  --accent-2: var(--ieee-cyan);
+  --accent-soft: var(--iet-magenta);
+  --heading: var(--ink);
+  --panel-radius: var(--radius);
+  --btn-radius: var(--radius-sm);
+  --label-font: var(--mono);
+  --paper-tint: transparent;
+}

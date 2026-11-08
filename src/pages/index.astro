@@ -1,16 +1,594 @@
 ---
----
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+const tracks = (await getCollection('tracks')).sort((a, b) => a.data.index - b.data.index);
+
+const ieeePillars = [
+  {
+    code: "SEC_01",
+    title: "Innovation & Technological Advancement",
+    desc: "Spearheading breakthroughs in microarchitectures, algorithmic cryptography, quantum circuits, and deep neural models that power the computational frontier."
+  },
+  {
+    code: "SEC_02",
+    title: "Engineering Excellence",
+    desc: "Enforcing uncompromising technical standards, cryptographic validation, and hardened digital systems capable of performing in mission-critical environments."
+  },
+  {
+    code: "SEC_03",
+    title: "Research & Development",
+    desc: "Bridging the gap between speculative theoretical mathematics, high-throughput signal communications, and production-grade cybernetic systems."
+  },
+  {
+    code: "SEC_04",
+    title: "Global Technical Collaboration",
+    desc: "Uniting over 400,000 security researchers, engineers, and scientists across 160 countries under shared open protocols and peer-reviewed journals."
+  },
+  {
+    code: "SEC_05",
+    title: "Building Technology for Humanity",
+    desc: "Directing computational firepower toward protecting human privacy, securing civic networks, and defending open information systems worldwide."
+  }
+];
+
+const ietPillars = [
+  {
+    code: "ENG_01",
+    title: "Engineering Excellence",
+    desc: "Forging physical and cyber-physical infrastructure engineered to endure high-stress real-world deployments — from aerospace avionics to smart power grids."
+  },
+  {
+    code: "ENG_02",
+    title: "Innovation & Creativity",
+    desc: "Harmonizing mechanical precision with real-time firmware, embedded robotics, autonomous actuators, and distributed telemetry networks."
+  },
+  {
+    code: "ENG_03",
+    title: "Knowledge Sharing",
+    desc: "Disseminating battle-tested engineering methodologies through rigorous technical symposia, industry mentoring, and open standards."
+  },
+  {
+    code: "ENG_04",
+    title: "Professional Development",
+    desc: "Certifying global engineering talent, advancing ethical charters, and mentoring the next generation of industrial systems architects."
+  },
+  {
+    code: "ENG_05",
+    title: "Connecting People & Technology",
+    desc: "Constructing durable, resilient industrial platforms that bridge physical automation with human society to engineer a better, sustainable world."
+  }
+];
+
+const timelinePhases = [
+  {
+    time: "15 OCT 2026 // 00:00 IST",
+    title: "Phase 1: Infiltration & Registration Terminals Live",
+    desc: "Global registration opens for SEED, CORE, FRONTIER, and add-on tracks. Problem statement archives initialized."
+  },
+  {
+    time: "28 NOV 2026 // 23:59 IST",
+    timeTag: "CRITICAL DEADLINE",
+    title: "Phase 2: Submission Lockdown & Screening",
+    desc: "Deadline for screening briefs and prototype repositories. Submissions enter cryptographic blind review."
+  },
+  {
+    time: "05 DEC 2026 // 18:00 IST",
+    title: "Phase 3: Finalist Decryption & Clearance",
+    desc: "Official announcement of shortlisted finalists cleared for on-site deployment at the TIET Patiala War Room."
+  },
+  {
+    time: "10–15 DEC 2026",
+    title: "Phase 4: Covert Mentor Tactical Syncs",
+    desc: "Dedicated architectural reviews and technical attack-vector planning with assigned IEEE & IET industry mentors."
+  },
+  {
+    time: "20–22 DEC 2026 // 36-HOUR SPRINT",
+    timeTag: "LIVE EVENT",
+    title: "Phase 5: Offline Hackathon & CTF Sprint",
+    desc: "36 hours of continuous hacking, hardware assembly, and midnight CTF exploits, followed by grand stage prototype pitches."
+  }
+];
+---
+<Base
+  title="CICADE — IEEE × IET | Two Societies. One Innovation Stage."
+  description="An immersive dual-sided hacking & engineering experience hosted jointly by IEEE & IET at TIET Patiala. 36 hours. 6 tracks. ₹12.75L+ in bounties."
+  bodyClass="page-home"
+  extraStyles={['/styles/home.css']}
+  extraScripts={['/scripts/home.js']}
+  prefetchImages={[
+    { href: '/static/theme/art/blueprint-human.webp' },
+    { href: '/static/theme/art/blueprint-machine.webp' }
+  ]}
+>
+  <!-- Cyber CRT Scanlines -->
+  <div class="cyber-scanlines" aria-hidden="true"></div>
+
+  <!-- Background Ambience (Tinted Noir Layers) -->
+  <div class="paper" aria-hidden="true">
+    <div class="paper__tint paper__tint--warm"></div>
+    <div class="paper__tint paper__tint--cool"></div>
+  </div>
+  <div class="paper paper--veil" aria-hidden="true">
+    <div class="paper__tint paper__tint--warm"></div>
+    <div class="paper__tint paper__tint--cool"></div>
+  </div>
+
+  <!-- Shared Site Navigation Header -->
+  <header class="site-header site-header--home">
+    <div class="site-header__bar">
+      <a class="brand" href="/" aria-label="CICADE IEEE × IET, Home">
+        <svg class="brand__logo" viewBox="590 164 470 162" width="124" height="44" role="img" focusable="false"><use href="#cicada-logo"/></svg>
+        <span class="brand__sub">IEEE &times; IET<br>CICADE</span>
+      </a>
+      <nav class="nav-primary" aria-label="Primary Navigation">
+        <ul>
+          <li><a class="nav-link" href="/" aria-current="page">Home</a></li>
+          <li><a class="nav-link" href="/tracks">Tracks</a></li>
+          <li><a class="nav-link" href="/guide">Guide</a></li>
+          <li><a class="nav-link" href="/announcements">Announcements</a></li>
+          <li><a class="nav-link" href="/sponsors">Sponsors</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="mobile-menu-button" class="nav-toggle nav-toggle--guest" type="button" aria-controls="mobile-menu" aria-expanded="false">
+          <span class="nav-toggle__icon" aria-hidden="true"><span></span></span><span class="nav-toggle__label">Menu</span>
+        </button>
+        <nav id="mobile-menu" class="nav-menu hidden" aria-label="Mobile Navigation">
+          <div class="nav-menu__group nav-menu__group--pages">
+            <p class="nav-menu__title">Explore CICADE</p>
+            <ul>
+              <li><a class="nav-menu__link" href="/" aria-current="page">Home</a></li>
+              <li><a class="nav-menu__link" href="/tracks">Tracks</a></li>
+              <li><a class="nav-menu__link" href="/guide">Guide</a></li>
+              <li><a class="nav-menu__link" href="/announcements">Announcements</a></li>
+              <li><a class="nav-menu__link" href="/sponsors">Sponsors</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       HERO: DUAL-WORLD SPLIT-SCREEN ANIMATION ENGINE (CONTROLLED BY home.js)
+       Left: IEEE (Cyber-Intelligence) | Right: IET (Kinetic Systems)
+       ========================================================================= -->
+  <main id="main-content" class="app-main" tabindex="-1">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__stage" data-o-fill="/static/theme/art/o-fill.webp">
+        <div class="art-frame" role="img" aria-label="CICADE Interactive Split: On the left, IEEE cyber intelligence; on the right, IET kinetic systems. Their center converges at the glowing laser nexus.">
+          <div class="art-cam">
+            
+            <!-- Laser Plumb-Line Apparatus (underneath the artwork) -->
+            <svg class="art-svg art-svg--under" viewBox="0 0 1672 941" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="thread-grad" gradientUnits="userSpaceOnUse" x1="0" y1="160" x2="0" y2="556">
+                  <stop offset="0" stop-color="#ff003c" stop-opacity=".3"/>
+                  <stop offset=".3" stop-color="#ff1744" stop-opacity=".85"/>
+                  <stop offset=".62" stop-color="#ff003c" stop-opacity="1"/>
+                  <stop offset=".95" stop-color="#ff1744" stop-opacity=".85"/>
+                  <stop offset="1" stop-color="#ff003c" stop-opacity=".2"/>
+                </linearGradient>
+                <radialGradient id="orb-grad" cx=".4" cy=".36" r=".72">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset=".42" stop-color="#ff1744"/>
+                  <stop offset="1" stop-color="#80001a"/>
+                </radialGradient>
+              </defs>
+              <g class="apparatus">
+                <path class="thread" d="M836.7 165V187.8M836.7 301.4V553"/>
+                <g class="apparatus__beads">
+                  <circle class="bead" cx="836.7" cy="368.2" r="2.2"/>
+                  <path class="tick" d="M828.2 397.4H845.2"/>
+                  <path class="orb-rays" d="M830.7 439.9L820.7 441.2L830.7 442.5ZM842.7 439.9L852.7 441.2L842.7 442.5ZM835.4 435.2L836.7 426.2L838 435.2ZM835.4 447.2L836.7 456.2L838 447.2Z"/>
+                  <circle class="orb" cx="836.7" cy="441.2" r="8"/>
+                  <path class="diamond" d="M836.7 505L843.3 511.4L836.7 517.8L830.1 511.4Z"/>
+                  <circle class="bead" cx="836.7" cy="537.4" r="2.4"/>
+                </g>
+                <circle class="field-ring" cx="836.7" cy="441.6" r="44.2"/>
+              </g>
+            </svg>
+
+            <!-- Left Artwork Layer: IEEE (Human / Intelligence) -->
+            <div class="art-layer art-layer--human">
+              <img src="/static/theme/art/art-human.webp" width="842" height="941" alt="" fetchpriority="high" />
+            </div>
+
+            <!-- Right Artwork Layer: IET (Machine / Systems) -->
+            <div class="art-layer art-layer--machine">
+              <img src="/static/theme/art/art-machine.webp" width="830" height="941" alt="" fetchpriority="high" />
+            </div>
+
+            <!-- Overlaid Vector Glyphs & Parallax -->
+            <svg class="art-svg art-svg--over" viewBox="0 0 1672 941" aria-hidden="true" focusable="false">
+              <defs>
+                <clipPath id="clip-phase-bio" clipPathUnits="userSpaceOnUse">
+                  <path d="M836.7 188.9A55.7 55.7 0 0 1 836.7 300.3Z"/><ellipse class="o-lens" data-o="bio" cx="836.7" cy="244.6" rx="0" ry="55.7"/>
+                </clipPath>
+                <clipPath id="clip-phase-os" clipPathUnits="userSpaceOnUse">
+                  <path d="M836.7 188.9A55.7 55.7 0 0 1 836.7 300.3Z"/><ellipse class="o-lens" data-o="os" cx="836.7" cy="244.6" rx="0" ry="55.7"/>
+                </clipPath>
+                <radialGradient id="dot-grad" cx=".42" cy=".38" r=".7">
+                  <stop offset="0" stop-color="#ffffff"/>
+                  <stop offset=".45" stop-color="#ff1744"/>
+                  <stop offset="1" stop-color="#00f0ff"/>
+                </radialGradient>
+              </defs>
+              <g class="logo">
+                <!-- IEEE Word (Left) -->
+                <g class="word word--bio">
+                  <use class="glyph" href="#g-I1"/>
+                  <use class="glyph" href="#g-E1"/>
+                  <use class="glyph" href="#g-E2"/>
+                  <use class="glyph" href="#g-E3"/>
+                  <g class="o o--bio">
+                    <g class="o__rot">
+                      <path class="o__x o__x--bio" d="M806.7 202.6L866.7 286.6" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+                  </g>
+                </g>
+
+                <!-- IET Word (Right) -->
+                <g class="word word--os">
+                  <g class="o o--os">
+                    <g class="o__rot">
+                      <path class="o__x o__x--os" d="M866.7 202.6L806.7 286.6" stroke-width="3" stroke-linecap="round"/>
+                    </g>
+                  </g>
+                  <use class="glyph" href="#g-I2"/>
+                  <use class="glyph" href="#g-E4"/>
+                  <use class="glyph" href="#g-T1"/>
+                </g>
+
+                <!-- Foreground Parallax Layer: CICADE -->
+                <g class="cicada-parallax cicada-parallax--bio">
+                  <use class="glyph glyph--sub" href="#g-C1"/>
+                  <use class="glyph glyph--sub" href="#g-I-sub"/>
+                  <use class="glyph glyph--sub" href="#g-C2"/>
+                  <use class="glyph glyph--sub glyph--a-left" href="#g-A-left"/>
+                </g>
+                <g class="cicada-parallax cicada-parallax--os">
+                  <use class="glyph glyph--sub glyph--a-right" href="#g-A-right"/>
+                  <use class="glyph glyph--sub" href="#g-D1"/>
+                  <use class="glyph glyph--sub" href="#g-A2"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- GPU WebGL Canvas Layer -->
+        <canvas class="hero__gl" aria-hidden="true"></canvas>
+        <div class="hero__glint" aria-hidden="true"><span></span></div>
+
+        <!-- Dynamic Floating Captions -->
+        <div class="hero__captions" aria-hidden="true">
+          <p class="caption caption--bio"><span>COMPUTING</span><span>INTELLIGENCE</span><span>SILICON</span></p>
+          <p class="caption caption--os"><span>ENGINEERING</span><span>KINETIC</span><span>SYSTEMS</span></p>
+        </div>
+
+        <!-- Central Hero Cockpit Copy -->
+        <div class="hero__copy">
+          <h1 id="hero-title" class="sr-only">IEEE &times; IET PRESENTS CICADE &mdash; Two Societies. One Innovation Stage.</h1>
+          
+          <p class="hero__tagline">
+            <span class="hero__paper">
+              <strong style="color: #00f0ff; letter-spacing: 0.12em; font-family: var(--sans); font-size: 1.15em;">IEEE</strong> 
+              <span style="color: #ff003c; font-weight: 300; margin: 0 0.25em;">&times;</span> 
+              <strong style="color: #ff003c; letter-spacing: 0.12em; font-family: var(--sans); font-size: 1.15em;">IET</strong>
+              <br />
+              <span style="font-size: 0.82em; letter-spacing: 0.22em; font-weight: 700; color: #ffffff; text-transform: uppercase;">PRESENTS CICADE</span>
+              <br />
+              <span style="font-size: 0.68em; letter-spacing: 0.08em; color: #94a3b8; font-family: var(--sans); font-weight: 400;">Two Societies. One Innovation Stage.</span>
+            </span>
+          </p>
+
+          <p class="hero__instruction">
+            <span class="terminal-bracket">[</span> SCROLL LEFT TO EXPLORE IEEE <span class="terminal-div">|</span> SCROLL RIGHT TO EXPLORE IET <span class="terminal-bracket">]</span>
+          </p>
+
+          <p class="hero__actions">
+            <a class="btn-laser" href="/tracks">Explore Tracks</a>
+            <a class="btn-laser btn-laser--outline" href="/guide">Event Guide</a>
+          </p>
+
+          <p class="hero__meta">
+            <span>IEEE &times; IET</span><span aria-hidden="true">/</span><span>TIET Patiala Chapters</span>
+          </p>
+        </div>
+
+        <p class="hero__cue" aria-hidden="true"><span>Scroll</span></p>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         READING CONTAINER: DUAL PATH-SWITCHING LAYOUT
+         When scrolling on Left: .path-bio is applied (only-os is hidden)
+         When scrolling on Right: .path-os is applied (only-bio is hidden)
+         Shared Intersection (#concept & #register) appears for BOTH paths!
+         ========================================================================= -->
+    <div class="reading">
+
+      <!-- Path Indicator Note -->
+      <p class="path-note">
+        <span class="path-note__bio">
+          <strong>// SECTOR_01 // IEEE INTEL ACTIVE</strong> &mdash; Advancing technology for humanity.
+          <br />
+          <a href="#top">&uarr; Return to summit</a> and scroll right to inspect the IET Kinetic Domain.
+        </span>
+        <span class="path-note__os">
+          <strong>// SECTOR_02 // IET SYSTEMS ACTIVE</strong> &mdash; Engineering a better world.
+          <br />
+          <a href="#top">&uarr; Return to summit</a> and scroll left to inspect the IEEE Computing Domain.
+        </span>
+      </p>
+
+      <!-- =====================================================================
+           IEEE DEDICATED EXPERIENCE — LEFT SIDE (.only-bio)
+           ===================================================================== -->
+      <section class="section world world--bio only-bio" id="bio" aria-labelledby="bio-title">
+        <header class="section__head">
+          <p class="eyebrow">
+            <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+            <span>01 // IEEE</span>
+          </p>
+          <h2 id="bio-title">IEEE &mdash; <em class="w-bio">Advancing technology for humanity.</em></h2>
+          <p class="lede">
+            The computational core. IEEE represents the global vanguard of electrical engineering, algorithmic intelligence, cryptographic defenses, and photonics that define modern civilization.
+          </p>
+        </header>
+
+        <!-- Section 2: What IEEE Represents (The Five Pillars) -->
+        <div style="margin-top: 2rem;">
+          <h3 style="font: 600 0.85rem/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: #00f0ff; margin-bottom: 1.2rem;">
+            [ PILLARS // WHAT IEEE REPRESENTS ]
+          </h3>
+
+          {ieeePillars.map(pillar => (
+            <article class="pillar-card pillar-card--ieee">
+              <div class="pillar-card__code">// {pillar.code}</div>
+              <h4 class="pillar-card__title">{pillar.title}</h4>
+              <p class="pillar-card__desc">{pillar.desc}</p>
+            </article>
+          ))}
+        </div>
+
+        <!-- Section 3: IEEE at CICADE -->
+        <article class="pillar-card pillar-card--ieee" style="margin-top: 2.5rem; background: rgba(0, 240, 255, 0.04); border-color: rgba(0, 240, 255, 0.35);">
+          <div class="pillar-card__code">// CICADE_ROLE // TECHNICAL CONTRIBUTION</div>
+          <h4 class="pillar-card__title" style="color: #00f0ff;">IEEE at CICADE</h4>
+          <p class="pillar-card__desc" style="color: #e2e8f0; font-size: 0.98rem; line-height: 1.7;">
+            IEEE spearheads the foundational computational tracks at CICADE. From architecting adversarial cybersecurity CTFs to provisioning deep neural testbeds and high-throughput microservices, IEEE ensures that participants tackle real theoretical problems with industry-standard rigor and mentorship.
+          </p>
+        </article>
+      </section>
+
+      <!-- =====================================================================
+           IET DEDICATED EXPERIENCE — RIGHT SIDE (.only-os)
+           ===================================================================== -->
+      <section class="section world world--os only-os" id="os" aria-labelledby="os-title">
+        <header class="section__head">
+          <p class="eyebrow">
+            <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+            <span>01 // IET</span>
+          </p>
+          <h2 id="os-title">IET &mdash; <em class="w-os">Engineering a better world.</em></h2>
+          <p class="lede">
+            The physical architecture. The Institution of Engineering and Technology engineers multidisciplinary systems: robotics, autonomous rovers, renewable microgrids, and industrial infrastructure built to withstand reality.
+          </p>
+        </header>
+
+        <!-- Section 2: What IET Represents (The Five Pillars) -->
+        <div style="margin-top: 2rem;">
+          <h3 style="font: 600 0.85rem/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: #ff003c; margin-bottom: 1.2rem;">
+            [ PILLARS // WHAT IET REPRESENTS ]
+          </h3>
+
+          {ietPillars.map(pillar => (
+            <article class="pillar-card pillar-card--iet">
+              <div class="pillar-card__code">// {pillar.code}</div>
+              <h4 class="pillar-card__title">{pillar.title}</h4>
+              <p class="pillar-card__desc">{pillar.desc}</p>
+            </article>
+          ))}
+        </div>
+
+        <!-- Section 3: IET at CICADE -->
+        <article class="pillar-card pillar-card--iet" style="margin-top: 2.5rem; background: rgba(255, 0, 60, 0.04); border-color: rgba(255, 0, 60, 0.35);">
+          <div class="pillar-card__code">// CICADE_ROLE // SYSTEMS CONTRIBUTION</div>
+          <h4 class="pillar-card__title" style="color: #ff003c;">IET at CICADE</h4>
+          <p class="pillar-card__desc" style="color: #e2e8f0; font-size: 0.98rem; line-height: 1.7;">
+            IET delivers the cyber-physical foundation of CICADE. Orchestrating rapid hardware prototyping benches, telemetry sensor fabrics, sustainable embedded energy tracks, and industrial stress-testing protocols, IET empowers hackers to transform theoretical algorithms into tactile, operational machines on stage.
+          </p>
+        </article>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 5: THE INTERSECTION — CICADE (VISIBLE TO BOTH PATHS)
+           Where IEEE & IET converge into a unified innovation stage.
+           ===================================================================== -->
+      <section class="section concept" id="concept" aria-labelledby="concept-title">
+        <header class="section__head">
+          <p class="eyebrow">
+            <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+            <span>02 // CONVERGENCE</span>
+          </p>
+          
+          <h2 id="concept-title" class="concept__title">
+            <span class="sr-only">IEEE × IET presents CICADE</span>
+            <svg class="wordmark-split" viewBox="580 176 500 140" aria-hidden="true" focusable="false">
+              <use class="wm-glyph" href="#g-I1"/>
+              <use class="wm-glyph" href="#g-E1"/>
+              <use class="wm-glyph" href="#g-E2"/>
+              <use class="wm-glyph" href="#g-E3"/>
+              <g class="wm-o wm-o--bio">
+                <path stroke="#00f0ff" stroke-width="2.6" stroke-linecap="round" d="M806.7 202.6L866.7 286.6"/>
+              </g>
+              <g class="wm-o wm-o--os">
+                <path stroke="#ff003c" stroke-width="2.6" stroke-linecap="round" d="M866.7 202.6L806.7 286.6"/>
+              </g>
+              <use class="wm-glyph" href="#g-I2"/>
+              <use class="wm-glyph" href="#g-E4"/>
+              <use class="wm-glyph" href="#g-T1"/>
+            </svg>
+          </h2>
+
+          <p class="lede">
+            At the frontier of modern innovation, pure computation achieves its highest power when unified with hardened physical engineering. Neither domain achieves maximum societal impact in isolation.
+          </p>
+        </header>
+
+        <!-- The Collaborative Outcome -->
+        <div class="nexus-hub">
+          <span class="nexus-hub__eyebrow">[ THE COLLABORATIVE OUTCOME ]</span>
+          <h3 class="nexus-hub__title">CICADE &mdash; <span>IEEE &times; IET</span></h3>
+          <p class="nexus-hub__tagline">Two Societies. One Innovation Stage.</p>
+          <p class="nexus-hub__desc">
+            CICADE is the flagship joint hackathon and CTF arena created through the bilateral alliance of the <strong>IEEE Student Branch</strong> and <strong>IET Student Chapter</strong> at Thapar Institute of Engineering & Technology (TIET), Patiala. Over 36 non-stop hours, teams advance from conceptual architectural blueprints to fully deployed functional prototypes.
+          </p>
+
+          <!-- Key Metrics -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <div style="background: rgba(14, 15, 24, 0.8); border: 1px solid rgba(255, 0, 60, 0.25); border-radius: 4px; padding: 1rem; text-align: center;">
+              <div style="font: 700 1.8rem/1 var(--mono); color: #ff003c;">36H</div>
+              <div style="font: 500 .65rem/1.3 var(--mono); color: #94a3b8; letter-spacing: .12em; margin-top: .4rem; text-transform: uppercase;">Sprint Arena</div>
+            </div>
+            <div style="background: rgba(14, 15, 24, 0.8); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 4px; padding: 1rem; text-align: center;">
+              <div style="font: 700 1.8rem/1 var(--mono); color: #00f0ff;">6</div>
+              <div style="font: 500 .65rem/1.3 var(--mono); color: #94a3b8; letter-spacing: .12em; margin-top: .4rem; text-transform: uppercase;">Specialized Tracks</div>
+            </div>
+            <div style="background: rgba(14, 15, 24, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; padding: 1rem; text-align: center;">
+              <div style="font: 700 1.8rem/1 var(--mono); color: #ffffff;">&#8377;12.75L+</div>
+              <div style="font: 500 .65rem/1.3 var(--mono); color: #94a3b8; letter-spacing: .12em; margin-top: .4rem; text-transform: uppercase;">Prize Pool & Perks</div>
+            </div>
+            <div style="background: rgba(14, 15, 24, 0.8); border: 1px solid rgba(255, 0, 60, 0.25); border-radius: 4px; padding: 1rem; text-align: center;">
+              <div style="font: 700 1.8rem/1 var(--mono); color: #ff1744;">TIET</div>
+              <div style="font: 500 .65rem/1.3 var(--mono); color: #94a3b8; letter-spacing: .12em; margin-top: .4rem; text-transform: uppercase;">Patiala War Room</div>
+            </div>
+          </div>
+
+          <!-- Event Tracks Module -->
+          <h4 style="font: 600 .8rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #ffffff; margin: 2rem 0 1rem;">
+            [ 06 BATTLEGROUND TRACKS ]
+          </h4>
+          <div class="nexus-tracks-grid">
+            {tracks.map(t => (
+              <a href={`/tracks?track=${t.data.trackId}`} class="nexus-track-item">
+                <span class="nexus-track-item__tag">TRACK_{t.data.index + 1} // {t.data.code}</span>
+                <span class="nexus-track-item__title">{t.data.title}</span>
+                <span class="nexus-track-item__desc">{t.data.shortDescription}</span>
+                <span class="nexus-track-item__link">Explore Track &rarr;</span>
+              </a>
+            ))}
+          </div>
+
+          <!-- Schedule & Timeline Module -->
+          <div class="timeline-module">
+            <h4 class="timeline-module__title">[ TIMELINE &amp; EXECUTION PHASES ]</h4>
+            {timelinePhases.map(phase => (
+              <div class="timeline-step">
+                <div class="timeline-step__time">
+                  {phase.time}
+                  {phase.timeTag && <span class="timeline-step__time-tag">{phase.timeTag}</span>}
+                </div>
+                <h5 class="timeline-step__head">{phase.title}</h5>
+                <p class="timeline-step__desc">{phase.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECTION 7: FINAL CALL TO ACTION
+           ===================================================================== -->
+      <section class="section cta" id="register" aria-labelledby="cta-title">
+        <div class="cta__hands" aria-hidden="true">
+          <span class="cta__hand cta__hand--bio"></span>
+          <svg class="cta__point" viewBox="-30 -30 60 60" focusable="false">
+            <circle class="cta__ring" r="26"/>
+            <circle class="cta__orb" r="5"/>
+          </svg>
+          <span class="cta__hand cta__hand--os"></span>
+        </div>
+
+        <p class="eyebrow">
+          <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+          <span>03 // JOIN</span>
+        </p>
+
+        <h2 id="cta-title">BE PART OF THE <em class="w-os" style="color: #ff003c;">INNOVATION.</em></h2>
+        <p class="cta__text" style="color: #94a3b8; font-size: 1.15rem; line-height: 1.6;">
+          Where engineering meets imagination. Join over 800+ top hackers, software engineers, security researchers, and systems architects at TIET Patiala.
+        </p>
+
+        <p class="cta__actions">
+          <a class="btn-laser" href="/tracks">Register Now</a>
+          <a class="btn-laser btn-laser--outline" href="/tracks">Explore Tracks</a>
+          <a class="btn-laser btn-laser--outline" href="/guide">View Event Guide</a>
+        </p>
+
+        <p class="cta__mentor">
+          Would you rather guide and mentor a team? 
+          <button type="button" class="btn-link" style="color: #00f0ff; text-decoration: underline;" data-mentor-signup-trigger>
+            Become an Industry Mentor
+          </button>
+        </p>
+      </section>
+
+      <!-- Mentorship Information Dialog Modal -->
+      <div id="mentor-signup-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mentor-modal-title">
+        <div class="modal__dialog" style="background: #090a14; border: 1px solid rgba(255, 0, 60, 0.4); box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);">
+          <button type="button" id="mentor-modal-close" class="modal__close" aria-label="Close">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-close"/></svg>
+          </button>
+          <p class="eyebrow"><svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg><span>Mentors</span></p>
+          <h3 id="mentor-modal-title" style="color: #ffffff;">Mentor at CICADE 2026</h3>
+          <p style="color: #94a3b8;">
+            Industry mentors help teams unlock technical roadblocks, evaluate cryptographic and hardware design, and refine high-impact production architectures.
+          </p>
+          <div class="grid grid--2" style="margin: 1.5rem 0;">
+            <div style="background: rgba(14, 15, 24, 0.8); padding: 1.2rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
+              <h4 style="color: #00f0ff;">Requirements</h4>
+              <ul class="list-dots" style="color: #cbd5e1; font-size: 0.88rem;">
+                <li>Track record in engineering, cyber security, AI, or hardware.</li>
+                <li>Availability for two tactical syncs during the 36-hour sprint.</li>
+                <li>Comfortable reviewing code repositories and system schematics.</li>
+              </ul>
+            </div>
+            <div style="background: rgba(14, 15, 24, 0.8); padding: 1.2rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
+              <h4 style="color: #ff003c;">Responsibilities</h4>
+              <ul class="list-dots" style="color: #cbd5e1; font-size: 0.88rem;">
+                <li>Review team architecture and offer high-level tactical feedback.</li>
+                <li>Provide debugging pointers for complex kernel, security or hardware issues.</li>
+                <li>Assist the judging committee during evaluation phases.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" id="mentor-modal-dismiss" class="btn-laser btn-laser--outline">Close</button>
+            <a href="mailto:ieee_iet@thapar.edu?subject=CICADE%20Mentor%20Application" class="btn-laser">Apply via Email</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer home-footer">
+    <div class="site-footer__inner">
+      <svg class="site-footer__logo" viewBox="590 164 470 162" width="138" height="48" aria-hidden="true" focusable="false"><use href="#cicada-logo"/></svg>
+      <div>
+        <p class="site-footer__small" style="color: #94a3b8;">&copy; 2026 IEEE &times; IET CICADE Hackathon &bull; Jointly organized by IEEE &amp; IET Student Chapters at TIET Patiala.</p>
+      </div>
+      <ul class="site-footer__links" aria-label="Community">
+        <li><a href="https://discord.gg/SsVuHQzX8" target="_blank" rel="noopener">Discord War Room</a></li>
+        <li><a href="https://instagram.com/cicadahackathon" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="/guide">Rules &amp; Guide</a></li>
+        <li><a href="/tracks">Tracks</a></li>
+      </ul>
+    </div>
+  </footer>
+</Base>

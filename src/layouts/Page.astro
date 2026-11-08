@@ -1,0 +1,36 @@
+---
+import Base from './Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+  currentPage?: string;
+  extraStyles?: string[];
+  extraScripts?: string[];
+}
+
+const {
+  title,
+  description,
+  bodyClass = 'world-public',
+  currentPage = '',
+  extraStyles = [],
+  extraScripts = [],
+} = Astro.props;
+---
+<Base
+  title={title}
+  description={description}
+  bodyClass={bodyClass}
+  extraStyles={extraStyles}
+  extraScripts={extraScripts}
+>
+  <SiteHeader currentPage={currentPage} />
+  <main id="main-content" class="app-main" tabindex="-1">
+    <slot />
+  </main>
+  <SiteFooter />
+</Base>

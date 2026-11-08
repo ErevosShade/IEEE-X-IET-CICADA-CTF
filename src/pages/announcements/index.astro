@@ -1,0 +1,64 @@
+---
+import { getCollection, render } from 'astro:content';
+import Page from '../../layouts/Page.astro';
+
+const announcements = (await getCollection('announcements'))
+  .sort((a, b) => {
+    if (a.data.pinned !== b.data.pinned) return a.data.pinned ? -1 : 1;
+    return b.data.date.getTime() - a.data.date.getTime();
+  });
+
+const announcementsWithContent = await Promise.all(
+  announcements.map(async (post) => {
+    const { Content } = await render(post);
+    return { post, Content };
+  })
+);
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<Page
+  title="Announcements — IEEE × IET CICADE"
+  bodyClass="world-public page-announcements"
+  currentPage="/announcements"
+>
+  <div class="shell page">
+    <header class="page-head">
+      <p class="eyebrow">
+        <svg class="eyebrow__o" aria-hidden="true" focusable="false"><use href="#o-mini"/></svg>
+        <span>Updates</span>
+      </p>
+      <h1>Announcements</h1>
+      <p class="lede">Important updates from the IEEE × IET CICADE organising team.</p>
+    </header>
+
+    <div class="stack stack-lg">
+      {announcementsWithContent.length === 0 ? (
+        <div class="empty-state">
+          <p>No announcements yet. Check back soon.</p>
+        </div>
+      ) : (
+        announcementsWithContent.map(({ post, Content }) => (
+          <article class={`panel panel--lifted ${post.data.pinned ? 'panel--accent' : ''}`}>
+            <div class="panel__head">
+              <div class="cluster">
+                <span class="badge badge--info">{post.data.category}</span>
+                {post.data.pinned && <span class="badge badge--ok">Pinned</span>}
+              </div>
+              <time class="faint small" datetime={post.data.date.toISOString()}>
+                {dateFormatter.format(post.data.date)}
+              </time>
+            </div>
+            <h2 class="panel__title">{post.data.title}</h2>
+            <div class="prose">
+              <Content />
+            </div>
+          </article>
+        ))
+      )}
+    </div>
+  </div>
+</Page>
+

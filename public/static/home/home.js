@@ -465,7 +465,7 @@ const BOX_CICADA_OS  = [836.7, 314, 925, 356];
   /* ════════════════════════ page-level outputs (both renderers) ════════════════════════ */
   const last = { lean: NaN, warm: NaN, cool: NaN, band: NaN, veil: NaN, read: NaN, copy: NaN, cue: NaN, reading: null, glintOn: null };
   // the paper as it looks under the current tint (for the nav band), measured from the rendered page
-  const PAPER_RGB = [234, 218.6, 203.5], WARM_RGB = [242, 208, 178], COOL_RGB = [196, 218, 245];
+  const PAPER_RGB = [5, 5, 8], WARM_RGB = [40, 4, 12], COOL_RGB = [4, 18, 36];
   function setIf(key, val, eps, fn) { if (Number.isNaN(last[key]) || Math.abs(last[key] - val) > eps) { last[key] = val; fn(val); } }
 
   function renderPage() {
@@ -655,7 +655,7 @@ uniform vec2 u_texel;
 uniform vec4 u_fade;        // soft edges (art units) wherever an edge of the painting is inside the viewport
 uniform float u_alpha;      // the receded world thins to a ghost behind the content
 varying vec2 v_uv; varying vec2 v_art; varying float v_sy;
-const vec3 PAPER = vec3(0.94, 0.87, 0.8);
+const vec3 PAPER = vec3(0.02, 0.02, 0.03);
 float lum(vec2 uv) { vec4 t = texture2D(u_tex, uv); return dot(t.rgb + (1.0 - t.a) * PAPER, vec3(0.299, 0.587, 0.114)); }
 void main() {
   vec4 c = texture2D(u_tex, v_uv);
@@ -699,29 +699,29 @@ void main() {
   float grad = mix(0.3, 0.72, smoothstep(300.0, 430.0, a.y)) * (1.0 - 0.35 * smoothstep(470.0, 553.0, a.y));
   float endFade = 1.0 - smoothstep(u_line.z - 4.0, u_line.z, a.y);
   float th = lineA(abs(x), 0.95) * (inUpper * 0.32 + inLower * grad * endFade) * vis;
-  col = over(col, vec3(0.62, 0.40, 0.15), th);
+  col = over(col, vec3(1.0, 0.05, 0.24), th);
   float below = step(a.y, u_line.z);   // ornaments exist only where the thread still hangs
   // tick at the ring top
   float tk = lineA(abs(a.y - 397.4), 0.62) * step(abs(x), 6.5) * below;
-  col = over(col, vec3(0.63, 0.40, 0.12), tk * 0.8 * vis);
+  col = over(col, vec3(1.0, 0.1, 0.3), tk * 0.8 * vis);
   // beads
   float b1 = 1.0 - smoothstep(1.8 - u_px, 1.8 + u_px, length(a - vec2(u_line.x, 368.2)));
   float b2 = 1.0 - smoothstep(2.0 - u_px, 2.0 + u_px, length(a - vec2(u_line.x, 537.4)));
-  col = over(col, vec3(0.36, 0.23, 0.09), max(b1, b2) * below * vis);
+  col = over(col, vec3(1.0, 0.0, 0.24), max(b1, b2) * below * vis);
   // diamond
   vec2 dd = abs(a - vec2(u_line.x, 511.4));
   float dm = 1.0 - smoothstep(1.0 - u_px / 6.5, 1.0 + u_px / 6.5, dd.x / 6.6 + dd.y / 6.4);
-  col = over(col, vec3(0.75, 0.50, 0.16), dm * below * vis);
+  col = over(col, vec3(1.0, 0.15, 0.3), dm * below * vis);
   // field ring (behind the fingers)
   float rr = length(a - vec2(u_line.x, 441.6));
   float ring = lineA(abs(rr - u_o.y), 0.62) * 0.5 * vis * vis;
-  col = over(col, vec3(0.64, 0.43, 0.17), ring);
+  col = over(col, vec3(1.0, 0.0, 0.24), ring);
   // point of light: orb + four tapering rays
   vec2 o = a - vec2(u_line.x, 441.2);
   float lv = u_o.w;
   float rayH = (1.0 - smoothstep(0.0, 1.0, abs(o.x) / 16.0)) * (1.0 - smoothstep(1.3 * (1.0 - abs(o.x) / 16.0) - u_px * 0.5, 1.3 * (1.0 - abs(o.x) / 16.0) + u_px * 0.5, abs(o.y)));
   float rayV = (1.0 - smoothstep(0.0, 1.0, abs(o.y) / 15.0)) * (1.0 - smoothstep(1.3 * (1.0 - abs(o.y) / 15.0) - u_px * 0.5, 1.3 * (1.0 - abs(o.y) / 15.0) + u_px * 0.5, abs(o.x)));
-  col = over(col, vec3(0.78, 0.52, 0.15), max(rayH, rayV) * lv);
+  col = over(col, vec3(1.0, 0.2, 0.35), max(rayH, rayV) * lv);
   float od = length(o);
   float orb = 1.0 - smoothstep(7.4 - u_px * 0.6, 7.4 + u_px * 0.6, od);
   vec3 oc = mix(vec3(0.97, 0.89, 0.75), vec3(0.86, 0.61, 0.23), smoothstep(0.0, 4.0, length(o - vec2(-1.6, -2.2))));
@@ -810,10 +810,10 @@ void main() {
   float keep = keepInk(n, u_d, u_style);
   if (u_style < 0.5) {
     float front = 1.0 - abs(keep * 2.0 - 1.0);
-    col.rgb = mix(col.rgb, vec3(0.18, 0.52, 0.91), front * 0.85);
+    col.rgb = mix(col.rgb, vec3(0.0, 0.94, 1.0), front * 0.85);
   } else if (u_d > 0.0) {
     float front = 1.0 - abs(keep * 2.0 - 1.0);
-    col.rgb = mix(col.rgb, vec3(0.82, 0.31, 0.17), front * 0.85);
+    col.rgb = mix(col.rgb, vec3(1.0, 0.0, 0.24), front * 0.85);
   }
   gl_FragColor = col * keep;
 }`;
@@ -1208,14 +1208,14 @@ void main() {
       gl.uniform4f(pr.u.u_rect, 0, 0, SPLIT, ART_H);
       gl.uniform1f(pr.u.u_off, V.offH);
       gl.uniform1f(pr.u.u_alpha, V.alphaH);
-      gl.uniform1f(pr.u.u_sketch, V.sketchH); gl.uniform3f(pr.u.u_sketchCol, 0.62, 0.27, 0.16);
+      gl.uniform1f(pr.u.u_sketch, V.sketchH); gl.uniform3f(pr.u.u_sketchCol, 0.0, 0.94, 1.0);
       gl.uniform2f(pr.u.u_texel, 1 / SPLIT, 1 / ART_H);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       gl.bindTexture(gl.TEXTURE_2D, T.machine);
       gl.uniform4f(pr.u.u_rect, SPLIT, 0, ART_W - SPLIT, ART_H);
       gl.uniform1f(pr.u.u_off, V.offM);
       gl.uniform1f(pr.u.u_alpha, V.alphaM);
-      gl.uniform1f(pr.u.u_sketch, V.sketchM); gl.uniform3f(pr.u.u_sketchCol, 0.16, 0.29, 0.55);
+      gl.uniform1f(pr.u.u_sketch, V.sketchM); gl.uniform3f(pr.u.u_sketchCol, 1.0, 0.0, 0.24);
       gl.uniform2f(pr.u.u_texel, 1 / (ART_W - SPLIT), 1 / ART_H);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
